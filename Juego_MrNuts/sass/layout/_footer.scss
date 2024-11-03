@@ -1,0 +1,23 @@
+@use "../abstracts/variables" as *;
+
+.footer-section{
+    background: $clr-blackgray;
+    border-bottom: 1rem solid $clr-black-coffe;
+    display: flex;
+    padding: 1.5rem 8.5rem;
+    justify-content: space-between;
+}
+.footer-icons{
+    display: flex;
+    gap: 1rem;
+    justify-content: baseline;
+    align-items: center;
+}
+
+.icon:hover{
+    transform: scale(1.1);
+    transition: all .2s ease-in-out;
+    color: $clr-coffe;
+}
+
+

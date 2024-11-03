@@ -1,0 +1,435 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "ADLaM Display", ssystem-ui;
+  background: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p, li, caption {
+  text-wrap: pretty;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+.w10 {
+  width: 10%;
+}
+
+.w20 {
+  width: 20%;
+}
+
+.w70 {
+  width: 70%;
+}
+
+.auto {
+  margin: 0 auto;
+}
+
+.pdt3 {
+  padding-top: 3rem;
+}
+
+h1 {
+  font-family: "ADLaM Display", ssystem-ui;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.text-dark {
+  color: rgb(30, 30, 30);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.Bigtitle {
+  padding-top: 4rem;
+  font-size: 4.375rem;
+  color: rgb(24, 23, 39);
+}
+
+.subtitle {
+  font-size: 2.25rem;
+  color: rgb(24, 23, 39);
+  padding-bottom: 3rem;
+}
+
+.title-description {
+  padding: 1rem;
+  font-size: 1rem;
+  color: rgb(139, 92, 29);
+}
+
+.title {
+  font-size: 3.25rem;
+  color: rgb(24, 23, 39);
+  border-bottom: 0.35rem solid rgb(139, 92, 29);
+}
+
+.cards-title {
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  color: rgb(24, 23, 39);
+  border-bottom: 0.05rem;
+}
+
+.cards-subtitle {
+  font-size: 2.25rem;
+  color: rgb(24, 23, 39);
+  margin-bottom: 1rem;
+  border-bottom: 0.35rem solid rgb(139, 92, 29);
+}
+
+.title-login {
+  font-size: 2.25rem;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.title-controles {
+  font-size: 3.25rem;
+  color: #fff;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 400;
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: rgb(24, 23, 39);
+  color: #fff;
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.gray-btn {
+  font-size: 1.5rem;
+  background: rgb(217, 217, 217);
+  color: rgb(30, 30, 30);
+}
+
+.coffe-btn {
+  margin-left: 1rem;
+  background: rgb(81, 53, 10);
+  color: #fff;
+}
+
+.btn-login {
+  font-family: "ADLaM Display", ssystem-ui;
+  background: #fff;
+  color: rgb(24, 23, 39);
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+}
+
+.card {
+  position: relative;
+  border: 0.05rem solid rgb(217, 217, 217);
+  border-radius: 3rem;
+  display: grid;
+  max-width: fit-content;
+  padding: 2rem;
+}
+
+.card-controls {
+  position: relative;
+  border-radius: 3rem;
+  display: grid;
+  max-width: fit-content;
+  padding: 2rem;
+  background: rgb(48, 31, 6);
+}
+
+.columnscard-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 3rem 7rem;
+}
+
+@media screen and (max-width: 768px) {
+  .columnscard-container {
+    grid-template-columns: 1fr;
+    padding: 1rem 2rem;
+  }
+}
+.logo:hover {
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.header-section {
+  padding: 1rem 8rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 0.35rem solid rgb(81, 53, 10);
+}
+
+.logo-header {
+  background: url("../../img/logo.png") no-repeat;
+  background-size: contain;
+  width: 7rem;
+  height: 7rem;
+}
+
+@media screen and (max-width: 768px) {
+  .header-section {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0;
+    height: 50%;
+    border-bottom: none;
+  }
+  .logo-header {
+    margin-bottom: 2rem;
+    width: 5rem;
+    height: 5rem;
+  }
+}
+.top-nav {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  align-items: start;
+  justify-content: center;
+}
+
+.nav-list-item {
+  text-decoration: none;
+  display: flex;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  color: rgb(30, 30, 30);
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-list-item:hover {
+  background: rgb(139, 92, 29);
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .top-nav {
+    margin: 0 auto;
+    width: 70%;
+    align-items: center;
+    gap: 1rem;
+  }
+  .nav-list-item {
+    padding: 0.25rem 1rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+.columns-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.5rem;
+}
+
+.levels-cards {
+  width: 80%;
+  margin: 0 auto;
+  padding: 3rem;
+  gap: 3rem;
+}
+
+.art-container {
+  display: flex;
+  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gear-icons {
+  padding-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.letras-container {
+  background: rgb(217, 217, 217);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  width: 80%;
+  align-items: center;
+  justify-content: center;
+}
+
+.black-box {
+  background-color: rgba(25, 26, 28, 0.9);
+  padding: 2rem;
+  border-radius: 10px;
+  width: 60%;
+  text-align: center;
+  color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .black-box {
+    width: 85%;
+  }
+}
+.ranking-list {
+  list-style: none;
+  padding: 0;
+}
+
+.ranking-item {
+  background-color: #4c4c4c;
+  padding: 0.8rem;
+  border-radius: 5px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.controles-container {
+  margin: 0 auto;
+  padding: 3rem;
+  gap: 3rem;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.input {
+  font-family: "ADLaM Display", ssystem-ui;
+  width: 80%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: #4c4c4c;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.footer-section {
+  background: rgb(41, 42, 45);
+  border-bottom: 1rem solid rgb(48, 31, 6);
+  display: flex;
+  padding: 1.5rem 8.5rem;
+  justify-content: space-between;
+}
+
+.footer-icons {
+  display: flex;
+  gap: 1rem;
+  justify-content: baseline;
+  align-items: center;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
+  color: rgb(81, 53, 10);
+}
+
+.banner-section {
+  background: url("../img/fondoJuego.png") no-repeat;
+  background-size: cover;
+  padding-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 5rem;
+  gap: 7rem;
+}
+
+.levels-section {
+  padding-top: 4rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.art-section {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.login-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80%;
+  background-image: url("../img/fondoJuego.png");
+  background-size: cover;
+  background-position: center;
+  padding: 5rem;
+}
+
+.controles-section {
+  background: rgb(81, 53, 10);
+  padding-top: 4rem;
+}
+
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+}
+html {
+  font-size: clamp(12px, 1.5vw, 16px);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*# sourceMappingURL=main.css.map */

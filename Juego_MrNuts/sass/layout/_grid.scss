@@ -1,0 +1,78 @@
+@use "../abstracts/variables" as *;
+
+.columns-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1.5rem;
+}
+
+
+
+.levels-cards {
+    width: 80%;
+    margin: 0 auto;
+    padding: 3rem;
+    gap: 3rem;
+}
+
+.art-container {
+    display: flex;
+    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.gear-icons {
+    padding-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.letras-container {
+    background: $clr-gray;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+}
+
+.black-box {
+    background-color: $clr-blackgrayT;
+    padding: 2rem;
+    border-radius: 10px;
+    width: 60%;
+    text-align: center;
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .black-box {
+        width: 85%;
+    }
+    
+}
+
+.ranking-list {
+    list-style: none;
+    padding: 0;
+
+}
+
+.ranking-item {
+    background-color: #4c4c4c;
+    padding: 0.8rem;
+    border-radius: 5px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.controles-container {
+    margin: 0 auto;
+    padding: 3rem;
+    gap: 3rem;
+}

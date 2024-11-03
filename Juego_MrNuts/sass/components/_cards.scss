@@ -1,0 +1,35 @@
+@use "../abstracts/variables" as *;
+
+.card{
+    position: relative;
+    border: .05rem solid $clr-gray;
+    border-radius: 3rem;
+    display: grid;
+    max-width: fit-content;
+    padding: 2rem;
+}
+
+.card-controls{
+    position: relative;
+
+    border-radius: 3rem;
+    display: grid;
+    max-width: fit-content;
+    padding: 2rem;
+    background: $clr-black-coffe;
+}
+
+.columnscard-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    padding: 3rem 7rem;
+}
+
+@media screen and (max-width: 768px) {
+    .columnscard-container {
+        grid-template-columns: 1fr; 
+        padding: 1rem 2rem; 
+    }
+}
+

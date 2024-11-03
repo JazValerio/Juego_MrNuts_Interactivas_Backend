@@ -1,0 +1,39 @@
+@use "../abstracts/variables" as *;
+.logo:hover{
+    transform: scale(1.1);
+    transition: all .2s ease-in-out;
+}
+
+.header-section{
+    padding: 1rem 8rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: .35rem solid $clr-coffe;
+}
+
+.logo-header{
+    background: url("../../img/logo.png") no-repeat;
+    background-size:contain;
+    width: 7rem;
+    height: 7rem;
+}
+
+@media screen and (max-width: 768px) {
+    .header-section {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 0;
+      height: 50% ;
+      border-bottom: none; 
+    }
+  
+    .logo-header {
+      margin-bottom: 2rem; 
+      width: 5rem;  
+      height: 5rem;
+    }
+  
+  }
