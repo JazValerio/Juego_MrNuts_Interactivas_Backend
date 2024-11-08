@@ -17,12 +17,12 @@ export class Game2 extends Phaser.Scene {
         let url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
         this.load.plugin('rexvirtualjoystickplugin', url, true);
         loader(this);
-        //this.load.json('levelData', './data/levelData.json');
-        this.load.json('levelData', 'http://gameplatform.test/editor/api.php?id=3');
+        this.load.json('levelData2', './data/levelData2.json');
+        //this.load.json('levelData2', 'http://gameplatform.test/editor/api.php?id=3');
     }
 
     create() {
-        const levelData = this.cache.json.get('levelData');
+        const levelData = this.cache.json.get('levelData2');
         this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(1);
         this.plataform = new Platform(this, levelData);
         
