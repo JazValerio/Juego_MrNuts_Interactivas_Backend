@@ -1,6 +1,10 @@
 export function loader(scene){
 
     scene.load.image('background','./img/game-assets/fondo.png');
+    scene.load.image('inventary','./img/game-assets/inventary.png');
+    scene.load.image('fixBoxIcon','./img/game-assets/fix-box.png');
+    scene.load.image('powerIcon','./img/game-assets/energy.png');
+    
 
     scene.load.image('tile','./img/game-assets/platform.png');
 

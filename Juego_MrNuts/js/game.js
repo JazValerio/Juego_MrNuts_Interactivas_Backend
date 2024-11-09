@@ -3,6 +3,7 @@ import { Player } from './components/player.js';
 import { loader } from './loader.js';
 import { Enemy } from './components/enemy.js';
 import { Collecters } from './components/collecters.js';
+import { Inventory } from './inventory.js';
 export class Game extends Phaser.Scene {
 
     constructor() {
@@ -19,6 +20,7 @@ export class Game extends Phaser.Scene {
         loader(this);
         this.load.json('levelData', './data/levelData.json');
         //this.load.json('levelData', 'http://gameplatform.test/editor/api.php?id=1');
+        this.inventory = new Inventory(this);
     }
 
     create() {
@@ -35,6 +37,7 @@ export class Game extends Phaser.Scene {
         this.enemy = new Enemy(this, levelData, this.player);
         this.enemy.create();
         this.player.create();
+        this.inventory.create();
         this.create_colliders();
     }
 
@@ -69,11 +72,13 @@ export class Game extends Phaser.Scene {
 
         this.physics.add.overlap(this.player.get(), this.collecters.getPowerCollectors(), (player, power) => {
             this.player.playerSpeedBoost();
+            this.inventory.addItem('power');
             power.destroy();
             this.collecters.updateRemainingCount();
         }, null);
 
         this.physics.add.overlap(this.player.get(), this.collecters.getFixBoxCollectors(), (player, fixBox) => {
+            this.inventory.addItem('fixBox');
             fixBox.destroy();
             this.collecters.updateRemainingCount();
         }, null);
