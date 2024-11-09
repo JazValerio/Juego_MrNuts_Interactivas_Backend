@@ -4,6 +4,7 @@ import { loader } from './loader.js';
 import { Enemy } from './components/enemy.js';
 import { Collecters } from './components/collecters.js';
 import { Inventory } from './inventory.js';
+import { Menu } from './menu.js';
 export class Game extends Phaser.Scene {
 
     constructor() {
@@ -39,6 +40,7 @@ export class Game extends Phaser.Scene {
         this.player.create();
         this.inventory.create();
         this.create_colliders();
+        this.menu = new Menu(this);
     }
 
     update() {

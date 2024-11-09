@@ -1,9 +1,15 @@
 export function loader(scene){
 
     scene.load.image('background','./img/game-assets/fondo.png');
+
     scene.load.image('inventary','./img/game-assets/inventary.png');
     scene.load.image('fixBoxIcon','./img/game-assets/fix-box.png');
     scene.load.image('powerIcon','./img/game-assets/energy.png');
+
+    scene.load.image('menu','./img/game-assets/menu.png');
+    scene.load.image('level1','./img/game-assets/btnNivel1.png');
+    scene.load.image('exit','./img/game-assets/btnSalir.png');
+    scene.load.image('restart','./img/game-assets/btnReiniciar.png');
     
 
     scene.load.image('tile','./img/game-assets/platform.png');
