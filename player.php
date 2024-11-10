@@ -20,9 +20,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./Juego_MrNuts/css/main.css">
 </head>
+
 <body>
-    <h1>Add player</h1>
+    <header class="header-section">
+        <h1 class="title">Add player</h1>
+        <a href="./admin.php"><input class="btn btn-login" type="button" value="Home"></a>
+    </header>
+
+    <a href="./players.php">List of players</a>
     <form action="./player.php" method="POST">
         <input type="text" name="name">
         <input type="number" name="score">

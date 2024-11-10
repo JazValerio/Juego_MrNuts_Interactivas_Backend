@@ -15,9 +15,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./Juego_MrNuts/css/main.css">
 </head>
+
 <body>
-    <h1>List of players</h1>
+    <header class="header-section">
+        <h1 class="title">List of Players</h1>
+        <a href="./player.php"><input class="btn btn-login" type="button" value="Back"></a>
+    </header>
+
     <table border="1">
         <tr>
             <td>Player Name</td>

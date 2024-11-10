@@ -77,5 +77,7 @@ export class Menu {
 
     quitGame() {
         this.scene.game.destroy(true);
+        //window.location.href = "../index.html";
+        
     }
 }

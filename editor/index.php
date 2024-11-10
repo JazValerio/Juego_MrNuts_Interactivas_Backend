@@ -10,9 +10,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game-Config</title>
+    <link rel="stylesheet" href="../Juego_MrNuts/css/main.css">
 </head>
 <body>
-    <h1>Game Configs</h1>
+    <header class="header-section">
+        <h1 class="title">Game Configs</h1>
+        <a href="../admin.php"><input class="btn btn-login" type="button" value="Home"></a>
+    </header>
+
     <a href="./add.php">Create a New JSON</a>
 
     <table border="1">

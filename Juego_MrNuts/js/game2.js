@@ -20,8 +20,8 @@ export class Game2 extends Phaser.Scene {
         this.load.plugin('rexvirtualjoystickplugin', url, true);
         loader(this);
         this.inventory = new Inventory(this);
-        this.load.json('levelData2', './data/levelData2.json');
-        //this.load.json('levelData2', 'http://gameplatform.test/editor/api.php?id=3');
+        //this.load.json('levelData2', './data/levelData2.json');
+        this.load.json('levelData2', 'http://gameplatform.test/editor/api.php?id=3');
     }
 
     create() {
