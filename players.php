@@ -6,7 +6,8 @@
         "tb_players.player_name",
         "tb_players.score",
         "tb_countries.country_name",
-        "tb_countries.country_code"
+        "tb_countries.country_code",
+        "tb_players.player_photo"
     ]);
 ?>
 <!DOCTYPE html>
@@ -29,6 +30,7 @@
             <td>Player Name</td>
             <td>Player Score</td>
             <td>Country</td>
+            <td>Player Photo</td>
         </tr>
         <?php //revisar
             foreach($items as $item){
@@ -36,6 +38,7 @@
                 echo "<td>{$item["player_name"]}</td>";
                 echo "<td>{$item["score"]}</td>";
                 echo "<td>{$item["country_name"]}</td>";
+                echo "<td><img src='./img/{$item["player_photo"]}' alt='img' style='width: 50px; height: 50px;'></td>";
                 echo "</tr>";
             }
         ?>

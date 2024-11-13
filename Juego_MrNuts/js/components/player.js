@@ -19,7 +19,7 @@ export class Player {
         this.player.setSize(50, 50);
         this.player.setOffset(35, 109);
         this.Scene.cameras.main.startFollow(this.player);
-        this.Scene.cameras.main.setZoom(1.3);  
+        this.Scene.cameras.main.setZoom(1.8);  
         this.Scene.cameras.main.setBounds(0, 0, this.Scene.game.config.width * this.Scene.cameras.main.zoom, this.Scene.game.config.height * this.Scene.cameras.main.zoom);
 
         this.Scene.anims.create({
@@ -47,8 +47,6 @@ export class Player {
         this.joystickCursosrs=this.joystick.createCursorKeys();
 
     }
-
-
 
     update() {
         this.onGround = this.player.body.onFloor();
@@ -88,11 +86,10 @@ export class Player {
             //this.Scene.scene.restart();
             this.Scene.cameras.main.fade(1000);
             this.Scene.cameras.main.on('camerafadeoutcomplete', function (camera, effect) {
-                //restart game 
+                //restart game
                 this.Scene.scene.restart();
             }, this)
         }
-
     }
 
     playerSlowDown() {
@@ -109,7 +106,7 @@ export class Player {
         }else{
             velx += 150; 
         }
-        
+    
         this.player.setData('velx', velx);
 
         //chatgpt: a partir de este metodo (metodo pegado) dayudame a controlar que despues de 10 segundos regrese la velocidad a la original.

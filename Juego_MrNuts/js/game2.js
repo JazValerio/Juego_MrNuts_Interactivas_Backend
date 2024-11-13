@@ -9,9 +9,11 @@ export class Game2 extends Phaser.Scene {
 
     constructor() {
         super({ key: 'game2' });
+        this.score = 0;
     }
 
-    init() {
+    init(data) {
+        this.score = data.score || 0;
     }
 
     preload() {
@@ -20,8 +22,8 @@ export class Game2 extends Phaser.Scene {
         this.load.plugin('rexvirtualjoystickplugin', url, true);
         loader(this);
         this.inventory = new Inventory(this);
-        //this.load.json('levelData2', './data/levelData2.json');
-        this.load.json('levelData2', 'http://gameplatform.test/editor/api.php?id=3');
+        this.load.json('levelData2', './data/levelData2.json');
+        //this.load.json('levelData2', 'http://gameplatform.test/editor/api.php?id=3');
     }
 
     create() {
@@ -41,6 +43,8 @@ export class Game2 extends Phaser.Scene {
         this.inventory.create();
         this.create_colliders();
         this.menu = new Menu(this);
+
+        this.scoreText = this.add.text(280, 170, 'Score: ' + this.score, { fontSize: '20px', fill: '#fff' }).setScrollFactor(0);
     }
 
     update() {
@@ -58,17 +62,20 @@ export class Game2 extends Phaser.Scene {
         });
 
         this.physics.add.overlap(this.player.get(), this.plataform.getEnergyBalls(), (player, energyBall) => {
+            this.updateScore(-10); 
             this.player.playerSlowDown();
             energyBall.destroy();
         }, null);
 
         this.physics.add.overlap(this.player.get(), this.collecters.getPowerCollectors(), (player, power) => {
+            this.updateScore(20); 
             this.player.playerSpeedBoost();
             this.inventory.addItem('power');
             power.destroy();
         }, null);
 
         this.physics.add.overlap(this.player.get(), this.collecters.getFixBoxCollectors(), (player, fixBox) => {
+            this.updateScore(50); 
             this.inventory.addItem('fixBox');
             fixBox.destroy();
             this.collecters.updateRemainingCount();
@@ -77,11 +84,16 @@ export class Game2 extends Phaser.Scene {
 
     create_joystick() {
         this.joystick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
-            x: 230,
-            y: 500,
+            x: 840,
+            y: 440,
             radius: 500,
             base: this.add.circle(0, 0, 60, 0x888888).setAlpha(0.5),
             thumb: this.add.circle(0, 0, 40, 0xcccccc).setAlpha(0.5),
         });
+    }
+
+    updateScore(score) {
+        this.score += score;
+        this.scoreText.setText('Score: ' + this.score); 
     }
 };

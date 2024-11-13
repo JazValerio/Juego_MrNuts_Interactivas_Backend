@@ -9,6 +9,7 @@ export class Game extends Phaser.Scene {
 
     constructor() {
         super({ key: 'game' });
+        this.score = 0;
     }
 
     init() {
@@ -19,8 +20,8 @@ export class Game extends Phaser.Scene {
         let url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
         this.load.plugin('rexvirtualjoystickplugin', url, true);
         loader(this);
-        //this.load.json('levelData', './data/levelData.json');
-        this.load.json('levelData', 'http://gameplatform.test/editor/api.php?id=1');
+        this.load.json('levelData', './data/levelData.json');
+        //this.load.json('levelData', 'http://gameplatform.test/editor/api.php?id=1');
         this.inventory = new Inventory(this);
     }
 
@@ -41,6 +42,8 @@ export class Game extends Phaser.Scene {
         this.inventory.create();
         this.create_colliders();
         this.menu = new Menu(this);
+
+        this.scoreText = this.add.text(280, 170, 'Score: ' + this.score, { fontSize: '20px', fill: '#fff' }).setScrollFactor(0);
     }
 
     update() {
@@ -51,7 +54,7 @@ export class Game extends Phaser.Scene {
         if (this.collecters.getRemainingCount() === 0) {
             this.cameras.main.fade(1000);
             this.cameras.main.on('camerafadeoutcomplete', function (camera, effect) {
-                this.scene.start('game2'); // Cambia a la siguiente escena
+                this.scene.start('game2',{ score: this.score }); // Cambia a la siguiente escena
             }, this)
             
         }
@@ -68,11 +71,13 @@ export class Game extends Phaser.Scene {
         });
 
         this.physics.add.overlap(this.player.get(), this.plataform.getEnergyBalls(), (player, energyBall) => {
+            this.updateScore(-10); 
             this.player.playerSlowDown();
             energyBall.destroy();
         }, null);
 
         this.physics.add.overlap(this.player.get(), this.collecters.getPowerCollectors(), (player, power) => {
+            this.updateScore(20); 
             this.player.playerSpeedBoost();
             this.inventory.addItem('power');
             power.destroy();
@@ -80,6 +85,7 @@ export class Game extends Phaser.Scene {
         }, null);
 
         this.physics.add.overlap(this.player.get(), this.collecters.getFixBoxCollectors(), (player, fixBox) => {
+            this.updateScore(50);
             this.inventory.addItem('fixBox');
             fixBox.destroy();
             this.collecters.updateRemainingCount();
@@ -88,11 +94,16 @@ export class Game extends Phaser.Scene {
 
     create_joystick() {
         this.joystick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
-            x: 230,
-            y: 500,
+            x: 840,
+            y: 440,
             radius: 500,
             base: this.add.circle(0, 0, 60, 0x888888).setAlpha(0.5),
             thumb: this.add.circle(0, 0, 40, 0xcccccc).setAlpha(0.5),
         });
+    }
+
+    updateScore(score) {
+        this.score += score;
+        this.scoreText.setText('Score: ' + this.score); 
     }
 };

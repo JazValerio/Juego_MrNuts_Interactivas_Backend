@@ -9,6 +9,7 @@ export class Inventory {
     create() {
         
         this.background = this.scene.add.image(0, 0, 'inventary')
+            .setScale(0.8)
             .setOrigin(0.5)
             .setVisible(false)
             .setDepth(10)
@@ -43,6 +44,7 @@ export class Inventory {
                     let y = yStart + row * 75;
     
                     const icon = this.scene.add.image(x, y, key === 'fixBox' ? 'fixBoxIcon' : 'powerIcon')
+                        .setScale(0.8)
                         .setOrigin(0, 0)
                         .setScale(0.75)
                         .setDepth(10);
