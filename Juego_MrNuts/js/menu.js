@@ -13,12 +13,12 @@ export class Menu {
             .setVisible(false)
             .setScale(0.8);
 
-        // Botones con imágenes
+       
         this.createImageButton('restart', 0, -60, () => this.restartGame());
         this.createImageButton('level1', 0, 0, () => this.goToFirstLevel());
         this.createImageButton('exit', 0, 60, () => this.quitGame());
 
-        // Tecla para abrir/cerrar el menú
+   
         this.scene.input.keyboard.on('keydown-E', () => {
             this.toggleMenu();
         });
@@ -29,10 +29,10 @@ export class Menu {
             .setInteractive()
             .setDepth(21)
             .setVisible(false)
-            .setScale(0.6); // Ajusta el tamaño si es necesario
+            .setScale(0.6); 
 
         button.on('pointerdown', callback);
-        button.on('pointerover', () => button.setTint(0xffff66)); // Efecto al pasar el ratón por encima
+        button.on('pointerover', () => button.setTint(0xffff66));
         button.on('pointerout', () => button.clearTint());
 
         this.buttons.push({ button, offsetX, offsetY });
@@ -49,7 +49,7 @@ export class Menu {
             this.scene.physics.resume();
         }
 
-        // Mostrar u ocultar los botones
+    
         this.buttons.forEach(({ button }) => {
             button.setVisible(this.isVisible);
         });
@@ -58,7 +58,7 @@ export class Menu {
     positionMenu() {
         const cam = this.scene.cameras.main;
 
-        // Centra el fondo del menú
+      
         this.background.setPosition(cam.midPoint.x, cam.midPoint.y);
 
        
@@ -76,8 +76,10 @@ export class Menu {
     }
 
     quitGame() {
+      
+        window.location.href = "http://gameplatform.test/Juego_MrNuts/index.html";
+        //window.history.back(); 
+        console.log("Quit Game");
         this.scene.game.destroy(true);
-        //window.location.href = "../index.html";
-        
     }
 }

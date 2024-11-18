@@ -150,6 +150,20 @@ h1 {
   font-size: 1rem;
 }
 
+.form-btn {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 400;
+  padding: 0.5rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  font-family: "ADLaM Display", ssystem-ui;
+  background: rgb(81, 53, 10);
+  color: #fff;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+}
+
 .card {
   position: relative;
   border: 0.05rem solid rgb(217, 217, 217);
@@ -196,7 +210,7 @@ h1 {
 }
 
 .logo-header {
-  background: url("../../img/logo.png") no-repeat;
+  background: url("../img/logo.png") no-repeat;
   background-size: contain;
   width: 7rem;
   height: 7rem;
@@ -409,6 +423,7 @@ h1 {
 }
 
 .admin-section {
+
   display: flex;
   flex-direction: column;
   align-items: center;

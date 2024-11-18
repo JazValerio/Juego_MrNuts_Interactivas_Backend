@@ -5,18 +5,16 @@ import { Enemy } from './components/enemy.js';
 import { Collecters } from './components/collecters.js';
 import { Inventory } from './inventory.js';
 import { Menu } from './menu.js';
-import { WinScreen } from './winScreen.js';
-
-export class Game extends Phaser.Scene {
+export class Game3 extends Phaser.Scene {
 
     constructor() {
-        super({ key: 'game' });
+        super({ key: 'game3' });
         this.score = 0;
-        this.currentLevel = 1;
+        this.currentLevel = 3;
     }
 
     init(data) {
-        
+        this.score = data.score || 0;
     }
 
     preload() {
@@ -24,13 +22,13 @@ export class Game extends Phaser.Scene {
         let url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
         this.load.plugin('rexvirtualjoystickplugin', url, true);
         loader(this);
-        this.load.json('levelData', './data/levelData.json');
-        //this.load.json('levelData', 'http://gameplatform.test/editor/api.php?id=1');
         this.inventory = new Inventory(this);
+        this.load.json('levelData3', './data/levelData2.json');
+        //this.load.json('levelData3', 'http://gameplatform.test/editor/api.php?id=1');
     }
 
     create() {
-        const levelData = this.cache.json.get('levelData');
+        const levelData = this.cache.json.get('levelData3');
         this.add.image(0, 0, 'background').setOrigin(0, 0).setScale(1);
         this.plataform = new Platform(this, levelData);
         
@@ -48,21 +46,11 @@ export class Game extends Phaser.Scene {
         this.menu = new Menu(this);
 
         this.scoreText = this.add.text(280, 170, 'Score: ' + this.score, { fontSize: '20px', fill: '#fff' }).setScrollFactor(0);
-
-        this.winScreen = new WinScreen(this);
     }
 
     update() {
         this.player.update();
         this.enemy.update();
-        console.log(this.collecters.getRemainingCount());
-
-        if (this.collecters.getRemainingCount() === 0) {
-           
-            this.winScreen.show();
-
-        }
-
         this.input.on('pointerdown', function (pointer) {
             console.log("🦐" + pointer.x, pointer.y);
         });
@@ -85,11 +73,10 @@ export class Game extends Phaser.Scene {
             this.player.playerSpeedBoost();
             this.inventory.addItem('power');
             power.destroy();
-            this.collecters.updateRemainingCount();
         }, null);
 
         this.physics.add.overlap(this.player.get(), this.collecters.getFixBoxCollectors(), (player, fixBox) => {
-            this.updateScore(50);
+            this.updateScore(50); 
             this.inventory.addItem('fixBox');
             fixBox.destroy();
             this.collecters.updateRemainingCount();

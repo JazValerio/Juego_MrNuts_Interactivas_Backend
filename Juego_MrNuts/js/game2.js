@@ -5,17 +5,20 @@ import { Enemy } from './components/enemy.js';
 import { Collecters } from './components/collecters.js';
 import { Inventory } from './inventory.js';
 import { Menu } from './menu.js';
+import { WinScreen } from './winScreen.js';
+
 export class Game2 extends Phaser.Scene {
 
     constructor() {
         super({ key: 'game2' });
         this.score = 0;
+        this.currentLevel = 2;
     }
 
     init(data) {
         this.score = data.score || 0;
     }
-
+    
     preload() {
         //link de joystick
         let url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
@@ -45,11 +48,21 @@ export class Game2 extends Phaser.Scene {
         this.menu = new Menu(this);
 
         this.scoreText = this.add.text(280, 170, 'Score: ' + this.score, { fontSize: '20px', fill: '#fff' }).setScrollFactor(0);
+
+        this.winScreen = new WinScreen(this);
     }
 
     update() {
         this.player.update();
         this.enemy.update();
+        console.log(this.collecters.getRemainingCount());
+
+        if (this.collecters.getRemainingCount() === 0) {
+            
+            this.winScreen.show();
+            
+        }
+
         this.input.on('pointerdown', function (pointer) {
             console.log("🦐" + pointer.x, pointer.y);
         });
@@ -71,6 +84,7 @@ export class Game2 extends Phaser.Scene {
             this.updateScore(20); 
             this.player.playerSpeedBoost();
             this.inventory.addItem('power');
+            this.collecters.updateRemainingCount();
             power.destroy();
         }, null);
 
@@ -96,4 +110,5 @@ export class Game2 extends Phaser.Scene {
         this.score += score;
         this.scoreText.setText('Score: ' + this.score); 
     }
+
 };

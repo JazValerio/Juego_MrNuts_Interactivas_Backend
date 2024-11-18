@@ -10,6 +10,8 @@ export function loader(scene){
     scene.load.image('level1','./img/game-assets/btnNivel1.png');
     scene.load.image('exit','./img/game-assets/btnSalir.png');
     scene.load.image('restart','./img/game-assets/btnReiniciar.png');
+    scene.load.image('winScreen','./img/game-assets/Win.png');
+    scene.load.image('continue','./img/game-assets/btnContinuar.png');
     
 
     scene.load.image('tile','./img/game-assets/platform.png');

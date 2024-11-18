@@ -77,9 +77,7 @@ export class Player {
         const worldBounds = this.Scene.physics.world.bounds;
 
         // Verificar si el jugador sale de los límites del mundo
-        if (this.player.x < worldBounds.x ||
-            this.player.x > worldBounds.width ||
-            this.player.y < worldBounds.y ||
+        if (
             this.player.y > worldBounds.height) {
 
             // Reiniciar la escena si el jugador sale del mundo

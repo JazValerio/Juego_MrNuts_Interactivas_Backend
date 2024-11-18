@@ -37,6 +37,7 @@
         }
     </style>
 
+
     <style type="text/css">
         #divCodeWrapper {
             height: calc(100vh - 200px);
@@ -424,7 +425,7 @@
             <textarea id="textarea1" wrap="soft" spellcheck="false" name="data"></textarea>
             <input type="submit" value="Submit data" style="display: block; position: absolute; width: 10%; color: white; background: black; z-index: 10; bottom: 10px; right: 20px; font-size: 18px;">
         </form>
-       
+        <a href="./index.php"><input type="button" value="Home" style="display: block; position: absolute; width: 10%; color: white; background: black; z-index: 10; bottom: 10px; right: 200px; font-size: 18px;"></a>
     </div>
 
     <!-- End of the code editor -->

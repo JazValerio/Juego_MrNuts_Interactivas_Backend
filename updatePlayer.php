@@ -12,9 +12,15 @@
         return $randomString;
     }
 
+    if($_GET){
+        $data= $database->select("tb_players","*",[
+            "id_player"=>$_GET["id"]
+        ]);
+    }
+
     if($_POST){
 
-        if(isset($_FILES["image"])){
+        if(isset($_FILES["image"]) && $_FILES["image"]!== ""){
 
             $errors=array();
             $file_name = $_FILES["image"]["name"];
@@ -40,11 +46,13 @@
                 move_uploaded_file($file_tmp,"./img/".$filenameRa);
 
                  // Reference: https://medoo.in/api/insert
-                $database->insert("tb_players",[
+                $database->update("tb_players",[
                     "player_name"=>$_POST["name"], 
                     "score"=>$_POST["score"],
                     "id_country"=>$_POST["contry"],
                     "player_photo"=>$filenameRa
+                ],[
+                    "id_player"=>$_POST["id"]
                 ]);
 
                 header("Location: ./players.php");
@@ -68,29 +76,32 @@
         <h1 class="title">Add player</h1>
         <a href="./admin.php"><input class="btn btn-login" type="button" value="Home"></a>
     </header>
-    <section class="admin-section">
-    <a class="nav-list-item" href="./players.php">List of players</a>
-    <form action="./player.php" method="POST" enctype="multipart/form-data">
-        <div>
-            <img id="preview" src="./img/previewImage.png" alt="preview" style="width: 100px; height: 100px"><!-- arreglar -->
-            <input type="file" name="image" onchange="previewFile(this)">
-        </div>
+
+    <a href="./players.php">List of players</a>
+    <form action="./updatePlayer.php" method="POST" enctype="multipart/form-data">
+        <img id="preview" src="./img/<?php echo $data[0]["player_photo"] ?>" alt="preview" style="width: 100px; height: 100px"><!-- arreglar -->
+        <input type="file" name="image" onchange="previewFile(this)">
         <label for="name">Name</label>
-        <input type="text" name="name">
+        <input type="text" name="name" value="<?php echo $data[0]["player_name"] ?>">
         <label for="score">Score</label>
-        <input type="number" name="score">
+        <input type="number" name="score" value="<?php echo $data[0]["score"] ?>">>
         <select name="contry" id="country">
 
             <?php 
                 foreach($items as $key => $value){
-                    echo '<option value="'.$value["id_country"].'">'.$value["country_name"].'</option>';
+                    if($data[0]["id_country"] == $value["id_country"]) {
+                        echo '<option value="'.$value["id_country"].'" selected>'.$value["country_name"].'</option>';
+                    }else{
+                        echo '<option value="'.$value["id_country"].'">'.$value["country_name"].'</option>';
+                    }
+                    
                 }
             ?>
             
         </select>
-        <input class="form-btn" type="submit" value="Submit">
+        <input type="hidden" name="id" value="<?php echo $data[0]["id_player"]?>">
+        <input type="submit" value="Submit">
     </form>
-    </section>
     <script>
         function previewFile(input) {
             let reader = new FileReader();
