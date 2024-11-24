@@ -1,16 +1,15 @@
 export class WinScreen {
     constructor(scene) {
         this.scene = scene;
-        this.visible = false; // Propiedad para controlar la visibilidad manualmente
+        this.visible = false; 
 
         this.createScreen();
-        this.hide(); // Ocultar la pantalla al inicio
+        this.hide();
     }
-
+    
     createScreen() {
         const cam = this.scene.cameras.main;
 
-        // Imagen de fondo de la pantalla de "Ganaste"
         this.winScreenImage = this.scene.add.image(cam.width / 2, cam.height / 2, 'winScreen').setOrigin(0.5).setDepth(10). setScale(0.8);
 
         
@@ -32,6 +31,12 @@ export class WinScreen {
                         this.scene.scene.start('game3', { score: this.scene.score }); 
                     }, this);
                 }
+                else if(this.scene.currentLevel === 3) {
+                    this.scene.cameras.main.fade(1000);
+                    this.scene.cameras.main.on('camerafadeoutcomplete', function (camera, effect) {
+                        window.location.href = "http://gameplatform.test/AutoaddPlayer.php?score=" + this.scene.score;
+                    }, this);
+                }
             });
 
         
@@ -46,12 +51,14 @@ export class WinScreen {
             });
     }
 
+    //chatgpt: Mediante esta referencia (código del inventario), ayudame a implementar la logóga para a esta base (base del código) poder implementar una pantalla de ganaste al finalizar el nivel.
+
     show() {
         // Posicionar todos los elementos en función de la cámara, útil para zoom y movimiento
         const cam = this.scene.cameras.main;
         this.winScreenImage.setPosition(cam.scrollX + cam.width / 2, cam.scrollY + cam.height / 2);
-        this.nextLevelButton.setPosition(cam.scrollX + cam.width / 2, cam.scrollY + cam.height / 2 + 100);
-        this.exitButton.setPosition(cam.scrollX + cam.width / 2, cam.scrollY + cam.height / 2 + 160);
+        this.nextLevelButton.setPosition(cam.scrollX + cam.width / 2, cam.scrollY + cam.height / 2 + 50);
+        this.exitButton.setPosition(cam.scrollX + cam.width / 2, cam.scrollY + cam.height / 2 + 100);
         
         // Hacer visibles los elementos
         this.winScreenImage.setVisible(true);

@@ -3,6 +3,7 @@
     $items =$database->select("tb_players",[
         "[>]tb_countries"=>["id_country" => "id_country"]
     ],[
+        "tb_players.id_player",
         "tb_players.player_name",
         "tb_players.score",
         "tb_countries.country_name",
@@ -31,14 +32,18 @@
                 <td>Player Score</td>
                 <td>Country</td>
                 <td>Player Photo</td>
+                <td>Edit</td>
+                <td>Delete</td>
             </tr>
-            <?php //revisar
+            <?php 
                 foreach($items as $item){
                     echo "<tr>";
                     echo "<td>{$item["player_name"]}</td>";
                     echo "<td>{$item["score"]}</td>";
                     echo "<td>{$item["country_name"]}</td>";
                     echo "<td><img src='./img/{$item["player_photo"]}' alt='img' style='width: 50px; height: 50px;'></td>";
+                    echo "<td><a href='./updatePlayer.php?id={$item["id_player"]}'>Edit</a></td>";
+                    echo "<td><a href='./deletePlayer.php?id={$item["id_player"]}'>Delete</a></td>";
                     echo "</tr>";
                 }
             ?>

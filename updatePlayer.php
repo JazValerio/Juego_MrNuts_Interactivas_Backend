@@ -74,13 +74,16 @@
 <body>
     <header class="header-section">
         <h1 class="title">Add player</h1>
-        <a href="./admin.php"><input class="btn btn-login" type="button" value="Home"></a>
+        <a href="./players.php"><input class="btn btn-login" type="button" value="Back"></a>
     </header>
-
-    <a href="./players.php">List of players</a>
+    <section class="admin-section">
+    
     <form action="./updatePlayer.php" method="POST" enctype="multipart/form-data">
-        <img id="preview" src="./img/<?php echo $data[0]["player_photo"] ?>" alt="preview" style="width: 100px; height: 100px"><!-- arreglar -->
-        <input type="file" name="image" onchange="previewFile(this)">
+        <div>
+            <img id="preview" src="./img/<?php echo $data[0]["player_photo"] ?>" alt="preview" style="width: 100px; height: 100px"><!-- arreglar -->
+            <input type="file" name="image" onchange="previewFile(this)">
+        </div>
+        
         <label for="name">Name</label>
         <input type="text" name="name" value="<?php echo $data[0]["player_name"] ?>">
         <label for="score">Score</label>
@@ -100,8 +103,9 @@
             
         </select>
         <input type="hidden" name="id" value="<?php echo $data[0]["id_player"]?>">
-        <input type="submit" value="Submit">
+        <input class="form-btn" type="submit" value="Submit">
     </form>
+    </section>
     <script>
         function previewFile(input) {
             let reader = new FileReader();

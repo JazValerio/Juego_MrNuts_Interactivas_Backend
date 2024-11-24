@@ -13,10 +13,15 @@ export class Game extends Phaser.Scene {
         super({ key: 'game' });
         this.score = 0;
         this.currentLevel = 1;
+
+        this.timer;
+        this.lengthe;
+        this.hasFetched=false;
     }
 
     init(data) {
-        
+        this.lengthe =0;
+        this.hasFetched=false;
     }
 
     preload() {
@@ -46,6 +51,14 @@ export class Game extends Phaser.Scene {
         this.inventory.create();
         this.create_colliders();
         this.menu = new Menu(this);
+
+        this.timer = this.time.addEvent({
+            delay: 1000,
+            loop: true,
+            callbackScope: this,
+            callback: this.startTraking
+            
+        });
 
         this.scoreText = this.add.text(280, 170, 'Score: ' + this.score, { fontSize: '20px', fill: '#fff' }).setScrollFactor(0);
 
@@ -110,4 +123,58 @@ export class Game extends Phaser.Scene {
         this.score += score;
         this.scoreText.setText('Score: ' + this.score); 
     }
+
+    startTraking() {
+        this.lengthe += 1;
+        console.log(this.lengthe,this.currentLevel);
+    }
+
+    restartGame(){
+        this.cameras.main.fade(1000);
+            this.cameras.main.on('camerafadeoutcomplete', function (camera, effect) {
+                //restart game
+                this.scene.restart();
+                this.score = 0;
+
+                if(!this.hasFetched){
+                    this.hasFetched = true;
+                    this.saveData("No", this.currentLevel);
+                }
+
+            }, this)
+    }
+
+    saveData(hasClosed, level){
+        fetch('http://gameplatform.test/tracking.php', {
+            method: 'POST',
+            mode: 'same-origin',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "browser": navigator.userAgent,
+                "screen": screen.width + "x" + screen.height,
+                "length": this.lengthe,
+                "level": level,
+                "closed": hasClosed,
+                "score": this.score
+            }),
+            keepalive: true
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        });
+    }
+
+    forceClosed(){
+        window.addEventListener('beforeunload', function (e) {
+            console.log("Browser tab is beging closed");
+            this.saveData("Yes", 1);
+        });
+    }
+
+    
 };
+

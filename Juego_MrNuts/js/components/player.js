@@ -80,13 +80,14 @@ export class Player {
         if (
             this.player.y > worldBounds.height) {
 
-            // Reiniciar la escena si el jugador sale del mundo
+            /*// Reiniciar la escena si el jugador sale del mundo
             //this.Scene.scene.restart();
             this.Scene.cameras.main.fade(1000);
             this.Scene.cameras.main.on('camerafadeoutcomplete', function (camera, effect) {
                 //restart game
                 this.Scene.scene.restart();
-            }, this)
+            }, this)*/
+            this.Scene.restartGame();
         }
     }
 

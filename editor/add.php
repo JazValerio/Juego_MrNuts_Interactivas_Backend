@@ -3,7 +3,7 @@
     require '../db.php';
 
     if($_POST){
-        date_default_timezone_set('America/Costa Rica');
+        date_default_timezone_set('America/Costa_Rica');
         // Reference: https://medoo.in/api/insert
         $database->insert("tb_game_config",[
             "game_data"=>$_POST["data"],

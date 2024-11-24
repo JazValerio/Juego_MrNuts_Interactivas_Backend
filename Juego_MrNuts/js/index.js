@@ -1,4 +1,4 @@
-import { Game } from './game.js';
+import { Game } from './game.js?';
 import { Game2 } from './game2.js';
 import { Game3 } from './game3.js';
 

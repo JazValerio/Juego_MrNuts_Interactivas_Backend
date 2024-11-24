@@ -5,16 +5,23 @@ import { Enemy } from './components/enemy.js';
 import { Collecters } from './components/collecters.js';
 import { Inventory } from './inventory.js';
 import { Menu } from './menu.js';
+import { WinScreen } from './winScreen.js';
 export class Game3 extends Phaser.Scene {
 
     constructor() {
         super({ key: 'game3' });
         this.score = 0;
         this.currentLevel = 3;
+
+        this.timer;
+        this.lengthe;
+        this.hasFetched=false;
     }
 
     init(data) {
         this.score = data.score || 0;
+        this.lengthe=0;
+        this.hasFetched=false;
     }
 
     preload() {
@@ -23,7 +30,7 @@ export class Game3 extends Phaser.Scene {
         this.load.plugin('rexvirtualjoystickplugin', url, true);
         loader(this);
         this.inventory = new Inventory(this);
-        this.load.json('levelData3', './data/levelData2.json');
+        this.load.json('levelData3', './data/levelData.json');
         //this.load.json('levelData3', 'http://gameplatform.test/editor/api.php?id=1');
     }
 
@@ -45,12 +52,31 @@ export class Game3 extends Phaser.Scene {
         this.create_colliders();
         this.menu = new Menu(this);
 
+        this.timer = this.time.addEvent({
+            delay: 1000,
+            loop: true,
+            callbackScope: this,
+            callback: this.startTraking
+            
+        });
+
+        this.winScreen = new WinScreen(this);
+
         this.scoreText = this.add.text(280, 170, 'Score: ' + this.score, { fontSize: '20px', fill: '#fff' }).setScrollFactor(0);
     }
 
     update() {
         this.player.update();
         this.enemy.update();
+
+        console.log(this.collecters.getRemainingCount());
+
+        if (this.collecters.getRemainingCount() === 0) {
+           
+            this.winScreen.show();
+
+        }
+
         this.input.on('pointerdown', function (pointer) {
             console.log("🦐" + pointer.x, pointer.y);
         });
@@ -73,6 +99,7 @@ export class Game3 extends Phaser.Scene {
             this.player.playerSpeedBoost();
             this.inventory.addItem('power');
             power.destroy();
+            this.collecters.updateRemainingCount();
         }, null);
 
         this.physics.add.overlap(this.player.get(), this.collecters.getFixBoxCollectors(), (player, fixBox) => {
@@ -97,4 +124,57 @@ export class Game3 extends Phaser.Scene {
         this.score += score;
         this.scoreText.setText('Score: ' + this.score); 
     }
+
+    startTraking() {
+        this.lengthe += 1;
+        console.log(this.lengthe,this.currentLevel);
+    }
+
+    restartGame(){
+        this.cameras.main.fade(1000);
+            this.cameras.main.on('camerafadeoutcomplete', function (camera, effect) {
+                //restart game
+                this.scene.restart();
+                this.score = 0;
+
+                if(!this.hasFetched){
+                    this.hasFetched = true;
+                    this.saveData("No", this.currentLevel);
+                }
+
+            }, this)
+    }
+
+    saveData(hasClosed, level){
+        fetch('http://gameplatform.test/tracking.php', {
+            method: 'POST',
+            mode: 'same-origin',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "browser": navigator.userAgent,
+                "screen": screen.width + "x" + screen.height,
+                "length": this.lengthe,
+                "level": level,
+                "closed": hasClosed,
+                "score": this.score
+            }),
+            keepalive: true
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        });
+    }
+
+    forceClosed(){
+        window.addEventListener('beforeunload', function (e) {
+            console.log("Browser tab is beging closed");
+            this.saveData("Yes", 1);
+        });
+    }
+
 };
+

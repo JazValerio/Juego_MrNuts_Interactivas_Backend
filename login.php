@@ -5,7 +5,7 @@
 
     require 'db.php';
     if($_POST){
-        
+    
         $user =  $database->select("tb_users","*",[
             "username"=>$_POST["name"] 
         ]);

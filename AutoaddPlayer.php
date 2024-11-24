@@ -12,6 +12,12 @@
         return $randomString;
     }
 
+    if (isset($_GET['score'])) {
+        $score = $_GET['score'];
+    } else {
+        $score = 0; // O algún valor predeterminado
+    }
+
     if($_POST){
 
         if(isset($_FILES["image"])){
@@ -47,7 +53,7 @@
                     "player_photo"=>$filenameRa
                 ]);
 
-                header("Location: ./players.php");
+                header("Location: ../Juego_MrNuts/ranking.html");
             }
         }
        
@@ -65,12 +71,13 @@
 
 <body>
     <header class="header-section">
-        <h1 class="title">Add player</h1>
-        <a href="./admin.php"><input class="btn btn-login" type="button" value="Home"></a>
+        <h1 class="title">¡Bien hecho!</h1>
+        <a href="./login.php"><input class="btn btn-login" type="button" value="Home"></a>
     </header>
     <section class="admin-section">
-    <a class="nav-list-item" href="./players.php">List of players</a>
-    <form action="./player.php" method="POST" enctype="multipart/form-data">
+    <h1 class="title">¡Felicidades has completado el juego!</h1>
+    <p>!Para quedar en la historia, registrate como jugador digno!</p>
+    <form action="./AutoaddPlayer.php" method="POST" enctype="multipart/form-data">
         <div>
             <img id="preview" src="./img/previewImage.png" alt="preview" style="width: 100px; height: 100px"><!-- arreglar -->
             <input  type="file" name="image" onchange="previewFile(this)">
@@ -78,7 +85,7 @@
         <label for="name">Name</label>
         <input type="text" name="name">
         <label for="score">Score</label>
-        <input type="number" name="score">
+        <input type="number" name="score" value="<?php echo $score; ?>" readonly>
         <select name="contry" id="country">
 
             <?php 
