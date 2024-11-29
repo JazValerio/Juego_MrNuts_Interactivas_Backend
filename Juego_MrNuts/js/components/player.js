@@ -5,7 +5,7 @@ export class Player {
         this.joystick = joystick;
     }
 
-    playerJump = -560;
+    playerJump = -550;
 
 
     create() {
@@ -72,21 +72,11 @@ export class Player {
 
     }
 
-
+    // Verificar si el jugador sale de los límites del mundo
     outOfWorld() {
         const worldBounds = this.Scene.physics.world.bounds;
-
-        // Verificar si el jugador sale de los límites del mundo
         if (
             this.player.y > worldBounds.height) {
-
-            /*// Reiniciar la escena si el jugador sale del mundo
-            //this.Scene.scene.restart();
-            this.Scene.cameras.main.fade(1000);
-            this.Scene.cameras.main.on('camerafadeoutcomplete', function (camera, effect) {
-                //restart game
-                this.Scene.scene.restart();
-            }, this)*/
             this.Scene.restartGame();
         }
     }
@@ -113,6 +103,18 @@ export class Player {
         this.Scene.time.delayedCall(10000, () => {
             this.player.setData('velx', 240);
         });
+    }
+
+    damageSpeed(velx){
+     this.player.setData('velx', velx);
+
+     this.Scene.time.delayedCall(10000, () => {
+        this.player.setData('velx', 240);
+     });
+    }
+
+    damageJump(velJump){
+     this.playerJump = velJump;
     }
 
     get() {

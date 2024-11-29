@@ -40,11 +40,44 @@
     text-decoration: none;
     font-weight: $fw-regular;
     padding: .5rem;
-    border-radius: .8rem;
+    border-radius: 1rem;
     cursor: pointer;
     font-family: $ff-main;
     background: $clr-coffe;
     color: $clr-white;
-    padding: 1rem 1.5rem;
     font-size: $fs-S;
+    margin: .5rem;
 }
+
+.form-btn:hover{
+    background: $clr-darkblue;
+    color: $clr-white;
+    transform: scale(1.1);
+    transition: all .2s ease-in-out;
+}
+
+input,
+select,
+textarea {
+  padding: 0.1rem;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    border-color: #bbb; // Efecto al pasar el mouse
+  }
+
+}
+
+input[type="file"] {
+  font-family: $ff-main;
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+  

@@ -16,6 +16,9 @@ export class Game3 extends Phaser.Scene {
         this.timer;
         this.lengthe;
         this.hasFetched=false;
+
+        window.gameInstance = this;
+
     }
 
     init(data) {
@@ -30,8 +33,8 @@ export class Game3 extends Phaser.Scene {
         this.load.plugin('rexvirtualjoystickplugin', url, true);
         loader(this);
         this.inventory = new Inventory(this);
-        this.load.json('levelData3', './data/levelData.json');
-        //this.load.json('levelData3', 'http://gameplatform.test/editor/api.php?id=1');
+        //this.load.json('levelData3', './data/levelData3.json');
+        this.load.json('levelData3', 'http://gameplatform.test/editor/api.php?id=4');
     }
 
     create() {
@@ -48,6 +51,7 @@ export class Game3 extends Phaser.Scene {
         this.enemy = new Enemy(this, levelData, this.player);
         this.enemy.create();
         this.player.create();
+        this.player.damageJump(-530);
         this.inventory.create();
         this.create_colliders();
         this.menu = new Menu(this);
@@ -89,13 +93,13 @@ export class Game3 extends Phaser.Scene {
         });
 
         this.physics.add.overlap(this.player.get(), this.plataform.getEnergyBalls(), (player, energyBall) => {
-            this.updateScore(-10); 
+            this.updateScore(-50); 
             this.player.playerSlowDown();
             energyBall.destroy();
         }, null);
 
         this.physics.add.overlap(this.player.get(), this.collecters.getPowerCollectors(), (player, power) => {
-            this.updateScore(20); 
+            this.updateScore(100); 
             this.player.playerSpeedBoost();
             this.inventory.addItem('power');
             power.destroy();
@@ -103,10 +107,15 @@ export class Game3 extends Phaser.Scene {
         }, null);
 
         this.physics.add.overlap(this.player.get(), this.collecters.getFixBoxCollectors(), (player, fixBox) => {
-            this.updateScore(50); 
+            this.updateScore(200); 
             this.inventory.addItem('fixBox');
             fixBox.destroy();
             this.collecters.updateRemainingCount();
+        }, null);
+
+        this.physics.add.overlap(this.player.get(), this.enemy.getEnemies(), (player, enemies) => {
+            this.updateScore(-1);
+            this.player.damageSpeed(210);
         }, null);
     }
 
@@ -127,7 +136,7 @@ export class Game3 extends Phaser.Scene {
 
     startTraking() {
         this.lengthe += 1;
-        console.log(this.lengthe,this.currentLevel);
+        //console.log(this.lengthe,this.currentLevel);
     }
 
     restartGame(){
@@ -169,12 +178,12 @@ export class Game3 extends Phaser.Scene {
         });
     }
 
-    forceClosed(){
-        window.addEventListener('beforeunload', function (e) {
-            console.log("Browser tab is beging closed");
-            this.saveData("Yes", 1);
-        });
-    }
-
 };
+
+window.addEventListener('beforeunload', (e) => {
+    console.log("Browser tab is being closed");
+    if (window.gameInstance) {
+        window.gameInstance.saveData("Yes", window.gameInstance.currentLevel);
+    }
+});
 

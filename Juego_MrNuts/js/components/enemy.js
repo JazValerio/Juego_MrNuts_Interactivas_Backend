@@ -3,6 +3,7 @@ export class Enemy {
     this.scene = scene;
     this.levelData = levelData;
     this.player = player;
+    this.time=0;
   }
 
   create() {
@@ -41,22 +42,30 @@ export class Enemy {
 
   update() {
     //chatgpt: Ayudame a controlar que el enemigo se mueva a la vez que el player, cuando este se acerca a un rango específico este lo siga, toma en base este codigo (base del método pegado a chat)
+    
     this.enemies.getChildren().forEach((enemy) => {
-      let distance = Phaser.Math.Distance.Between(
-        this.player.get().x, this.player.get().y,
-        enemy.x, enemy.y
-      );
+        let distance = Phaser.Math.Distance.Between(
+            this.player.get().x, this.player.get().y,
+            enemy.x, enemy.y
+        );
 
-      if (distance < 120) { 
-        enemy.setVelocity(100);
-        this.scene.physics.moveToObject(enemy, this.player.get(), enemy.speed);
-      } else {
-        enemy.setVelocity(0);
-      }
+        if (distance < 120) { 
+            enemy.setVelocity(100);
+            this.scene.physics.moveToObject(enemy, this.player.get(), enemy.speed);
+        } else {
+            enemy.setVelocity(0);
+            
+        }
     });
-  }
+}
+
 
   get() {
     return this.enemy;
   }
+
+  getEnemies() {
+    return this.enemies;
+  }
+
 }

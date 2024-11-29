@@ -52,7 +52,7 @@
     .black-box {
         width: 85%;
     }
-    
+
 }
 
 .ranking-list {
@@ -75,4 +75,51 @@
     margin: 0 auto;
     padding: 3rem;
     gap: 3rem;
+}
+
+table {
+    margin-top: 1rem;
+    border-collapse: collapse;
+    text-align: left;
+    
+    font-size: 1rem;
+    color: $clr-darkblue;
+
+    th,
+    td {
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+
+        &:nth-child(1) {
+            text-align: center;
+        }
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+        color: $clr-darkblue;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .options {
+        a {
+            text-decoration: none;
+            color: $clr-whitebrown;
+            font-weight: bold;
+            margin: 0 5px;
+
+            &:hover {
+                color: $clr-coffe;
+                text-decoration: underline;
+            }
+        }
+    }
 }

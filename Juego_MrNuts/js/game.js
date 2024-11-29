@@ -17,6 +17,9 @@ export class Game extends Phaser.Scene {
         this.timer;
         this.lengthe;
         this.hasFetched=false;
+
+        window.gameInstance = this;
+    
     }
 
     init(data) {
@@ -29,8 +32,8 @@ export class Game extends Phaser.Scene {
         let url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js';
         this.load.plugin('rexvirtualjoystickplugin', url, true);
         loader(this);
-        this.load.json('levelData', './data/levelData.json');
-        //this.load.json('levelData', 'http://gameplatform.test/editor/api.php?id=1');
+        //this.load.json('levelData', './data/levelData.json');
+        this.load.json('levelData', 'http://gameplatform.test/editor/api.php?id=1');
         this.inventory = new Inventory(this);
     }
 
@@ -88,13 +91,13 @@ export class Game extends Phaser.Scene {
         });
 
         this.physics.add.overlap(this.player.get(), this.plataform.getEnergyBalls(), (player, energyBall) => {
-            this.updateScore(-10); 
+            this.updateScore(-50); 
             this.player.playerSlowDown();
             energyBall.destroy();
         }, null);
 
         this.physics.add.overlap(this.player.get(), this.collecters.getPowerCollectors(), (player, power) => {
-            this.updateScore(20); 
+            this.updateScore(100); 
             this.player.playerSpeedBoost();
             this.inventory.addItem('power');
             power.destroy();
@@ -102,10 +105,15 @@ export class Game extends Phaser.Scene {
         }, null);
 
         this.physics.add.overlap(this.player.get(), this.collecters.getFixBoxCollectors(), (player, fixBox) => {
-            this.updateScore(50);
+            this.updateScore(200);
             this.inventory.addItem('fixBox');
             fixBox.destroy();
             this.collecters.updateRemainingCount();
+        }, null);
+
+        this.physics.add.overlap(this.player.get(), this.enemy.getEnemies(), (player, enemies) => {
+            this.updateScore(-1);
+            this.player.damageSpeed(220);
         }, null);
     }
 
@@ -123,6 +131,7 @@ export class Game extends Phaser.Scene {
         this.score += score;
         this.scoreText.setText('Score: ' + this.score); 
     }
+
 
     startTraking() {
         this.lengthe += 1;
@@ -168,13 +177,15 @@ export class Game extends Phaser.Scene {
         });
     }
 
-    forceClosed(){
-        window.addEventListener('beforeunload', function (e) {
-            console.log("Browser tab is beging closed");
-            this.saveData("Yes", 1);
-        });
-    }
-
-    
+ 
 };
+
+//chatgpt: Ayudame basandote en este código (base del código) a que se pueda acceder a el método saveData ya que en este contexto de this no se encuentra
+
+window.addEventListener('beforeunload', (e) => {
+    console.log("Browser tab is being closed");
+    if (window.gameInstance) {
+        window.gameInstance.saveData("Yes", window.gameInstance.currentLevel);
+    }
+});
 
