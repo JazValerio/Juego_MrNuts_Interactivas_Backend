@@ -26,14 +26,16 @@
         <a href="./player.php"><input class="btn btn-login" type="button" value="Back"></a>
     </header>
     <section class="admin-section">
+        <h2 class="subtitle text-center ">Players Registered</h2>
+        <p>Here you can see all the players registered and manage them</p>
         <table border="1">
             <tr>
                 <td>Player Name</td>
                 <td>Player Score</td>
                 <td>Country</td>
                 <td>Player Photo</td>
-                <td>Edit</td>
-                <td>Delete</td>
+                <td>Options</td>
+              
             </tr>
             <?php 
                 foreach($items as $item){
@@ -42,13 +44,16 @@
                     echo "<td>{$item["score"]}</td>";
                     echo "<td>{$item["country_name"]}</td>";
                     echo "<td><img src='./img/{$item["player_photo"]}' alt='img' style='width: 50px; height: 50px;'></td>";
-                    echo "<td><a href='./updatePlayer.php?id={$item["id_player"]}'>Edit</a></td>";
-                    echo "<td><a href='./deletePlayer.php?id={$item["id_player"]}'>Delete</a></td>";
+                    echo "<td class='options'><a href='./updatePlayer.php?id={$item["id_player"]}'>Edit</a> | <a href='./deletePlayer.php?id={$item["id_player"]}'>Delete</a> </td>";
                     echo "</tr>";
                 }
             ?>
         </table>
     </section>
+
+    <footer>
+        <p class="text-center">&copy; 2024 Game Platform MrNuts.</p>
+    </footer>
     
 </body>
 </html>

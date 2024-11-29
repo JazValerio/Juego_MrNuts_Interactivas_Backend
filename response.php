@@ -10,7 +10,7 @@
         "password"=>$pass,
         "email"=>$_POST["email"],
     ]);
-    header("Location:./list.php");
+    header("Location:./admin.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

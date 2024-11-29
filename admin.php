@@ -24,8 +24,8 @@
 
     <section class="admin-section">
         <p class="subtitle text-center">Hi, <?php echo "<strong>".$_SESSION["username"]. "</strong >"; ?></p>
-        
-        <nav>
+        <p class="pdb2">Welcome to the administration panel, here you can manage the game configs and its players, you have the following options: </p>
+        <nav class="pdb2">
             <ul class="top-nav">
                 <li><a class="nav-list-item" href="./register.php">Register new user</a></li>
                 <li><a class="nav-list-item" href="./player.php">Manage players</a></li>
@@ -35,12 +35,12 @@
         
 
         <section>
-            <h2>Users registered</h2>
+            <h2 class="text-center ">Users registered</h2>
             <table border="1">
                 <tr>
                     <td>Username</td>
-                    <td>email</td>
-                    <td>options</td>
+                    <td>Email</td>
+                    <td>Options</td>
                 </tr>
 
                 <?php
@@ -48,7 +48,7 @@
                         echo "<tr>";
                             echo "<td>" . $user["username"] . "</td>";
                             echo "<td>" . $user["email"] . "</td>";
-                            echo "<td><a href='update.php?id=" . $user["id_user"] . "'>Update</a> | <a href='delete.php?id=" . $user["id_user"] . "'>Delete</a></td>";
+                            echo "<td class='options'><a href='update.php?id=" . $user["id_user"] . "'>Update</a> | <a href='delete.php?id=" . $user["id_user"] . "'>Delete</a></td>";
                         echo "</tr>";
                     }
                 ?>
@@ -58,6 +58,9 @@
         
     </section>
     
+    <footer>
+        <p class="text-center">&copy; 2024 Game Platform MrNuts.</p>
+    </footer>
     
     
 </body>

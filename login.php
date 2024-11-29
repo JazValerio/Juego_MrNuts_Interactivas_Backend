@@ -71,21 +71,21 @@
       </ul>
     </nav>
   </header>
-  <div class="login-section">
+  <div class="login-section pdb2">
     <div class="black-box">
-      <h2 class="title-login">Login</h2>
+      <h2 class="title-login pdb2">Login</h2>
 
       <form action="./login.php" method="POST">
-        <div class="input-group" >
+        <div class="input-group pdb2" >
           <label class="label" for="Username">Username</label>
           <input class="input" type="text" name="name">
         </div>
-        <div class="input-group">
+        <div class="input-group pdb2">
           <label class="label" for="password">Password</label>
           <input class="input" type="password" name="password">
         </div>
         <div>
-            <input class="btn btn-login" type="submit" value="Login">
+            <input class="btn btn-login " type="submit" value="Login">
         </div>
         
       </form>

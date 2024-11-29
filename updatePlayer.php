@@ -73,11 +73,12 @@
 
 <body>
     <header class="header-section">
-        <h1 class="title">Add player</h1>
+        <h1 class="title">Edit player</h1>
         <a href="./players.php"><input class="btn btn-login" type="button" value="Back"></a>
     </header>
     <section class="admin-section">
-    
+    <h2>Complete the form to edit a player</h2>
+    <p>As a admin you can edit a player, dont forget to upload a new image</p>
     <form action="./updatePlayer.php" method="POST" enctype="multipart/form-data">
         <div>
             <img id="preview" src="./img/<?php echo $data[0]["player_photo"] ?>" alt="preview" style="width: 100px; height: 100px"><!-- arreglar -->

@@ -15,7 +15,7 @@
     if (isset($_GET['score'])) {
         $score = $_GET['score'];
     } else {
-        $score = 0; // O algún valor predeterminado
+        $score = 0; 
     }
 
     if($_POST){

@@ -19,7 +19,9 @@
     </header>
     <section class="admin-section">
    
-        <P>Complete the form to register a new user</P>
+        <h2>Complete the form to register a new user</h2>
+        <p class="pdb2"> Here you can register a new Adimn user, who will be able to manage the game configs and its players</p>
+
         <form action="./response.php" method="POST">
             <label for="name">Username</label>
             <input type="text" name="name">
@@ -30,6 +32,10 @@
             <input class="form-btn" type="submit" value="submit data" >
         </form>
     </section>
+
+    <footer>
+        <p class="text-center">&copy; 2024 Game Platform MrNuts.</p>
+    </footer>
     
 </body>
 </html>

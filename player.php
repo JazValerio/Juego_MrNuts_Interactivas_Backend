@@ -69,7 +69,9 @@
         <a href="./admin.php"><input class="btn btn-login" type="button" value="Home"></a>
     </header>
     <section class="admin-section">
-    <a class="nav-list-item" href="./players.php">List of players</a>
+    <h2>Complete the form to add a new player</h2>
+    <p class="pdb2">As a admin you can add new players to the game and manage them </p>
+    <a class="nav-list-item" href="./players.php">List of players registered</a>
     <form action="./player.php" method="POST" enctype="multipart/form-data">
         <div>
             <img id="preview" src="./img/previewImage.png" alt="preview" style="width: 100px; height: 100px"><!-- arreglar -->
@@ -79,6 +81,7 @@
         <input type="text" name="name">
         <label for="score">Score</label>
         <input type="number" name="score">
+        <label for="score">Country</label>
         <select name="contry" id="country">
 
             <?php 
@@ -91,6 +94,10 @@
         <input class="form-btn" type="submit" value="Submit">
     </form>
     </section>
+
+    <footer>
+        <p class="text-center">&copy; 2024 Game Platform MrNuts.</p>
+    </footer>
     <script>
         function previewFile(input) {
             let reader = new FileReader();
